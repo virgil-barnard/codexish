@@ -6,9 +6,11 @@ import httpx
 from dotenv import load_dotenv
 
 from langchain_core.tools import Tool
-from langchain.agents import initialize_agent
+# from langchain.agents import initialize_agent
 from langchain.agents.agent_types import AgentType
 from langchain_openai import ChatOpenAI   
+from langchain.agents import create_openai_functions_agent
+from langchain.agents.agent import AgentExecutor
 
 load_dotenv()
 
@@ -61,15 +63,12 @@ async def run_agent():
         Tool.from_function(github_create_issue),
     ]
 
-    agent = initialize_agent(
-        tools=tools,
-        agent_type=AgentType.OPENAI_FUNCTIONS,
-        llm=llm,
-        verbose=True
-    )
-
-    result = agent.run(
-        "List my repositories and create an issue titled 'LangChain Test Issue'."
+    agent = create_openai_functions_agent(llm=llm, tools=tools)
+    executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    result = await executor.ainvoke(
+        {
+            "input": "List my repositories and create an issue titled 'LangChain Test Issue'."
+        }
     )
 
     print("\n=== Final ===\n", result)
