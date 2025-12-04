@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  autogen-agent:
+    build: .
+    env_file:
+      - .env
+    working_dir: /app
+    volumes:
+      # Persist cloned repos across runs
+      - ./repo_cache:/app/repo_cache
+      # Optional: mount your certs.pem
+      # - ./certs/certs.pem:/app/certs/certs.pem:ro
+    # Default command arguments after "python cli.py run"
+    # You override these when running.
+    command: []

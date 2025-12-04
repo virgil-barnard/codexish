@@ -1,0 +1,15 @@
+[project]
+name = "autogen-github-agent-cli"
+version = "0.1.0"
+description = "AutoGen v2 agent workflow that edits GitHub repos, opens PRs, and resolves issues."
+requires-python = ">=3.9"
+dependencies = [
+    "autogen-agentchat~=0.2",
+    "openai>=1.40.0",
+    "typer>=0.12.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0"
+]
+
+[project.scripts]
+autogen-gh = "cli:app"
