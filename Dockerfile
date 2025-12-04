@@ -20,9 +20,11 @@ RUN pip install --no-cache-dir \
     typer>=0.12.0 \
     python-dotenv>=1.0.0 \
     requests>=2.31.0 \
-    langchain==0.1.17 \
-    langchain-community==0.0.36 \
-    openai==1.16.1
+    langchain>=0.2.6 \
+    langchain-openai>=0.1.4 \
+    langchain-core>=0.2.10 \
+    langchain-community>=0.2.6 \
+    openai>=1.37.0
 
 ENV PYTHONUNBUFFERED=1
 
